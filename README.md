@@ -53,37 +53,43 @@ The project expects access to:
 
 ## Project Phases
 
-### Phase 1: Literature Review ✓
+### Phase 1: Literature Review ✅
 - Review citation prediction literature
 - Identify research gaps
 - Establish baseline metrics
 
-### Phase 2: Data Collection ✓
+### Phase 2: Data Collection ✅
 - Coordinate with AUB (Khaled Noubani)
 - Obtain Scopus and SciVal data
 
-### Phase 3: Data Cleaning & Preprocessing (Current)
+### Phase 3: Data Cleaning & Preprocessing 🔄 (Current)
 - Merge Scopus and SciVal datasets
 - Quality filters (encoding, language, missing fields)
 - Data validation and exploration
 
-### Phase 4: Feature Engineering (Next)
+### Phase 4: Feature Engineering ⏳
 - Author features (h-index, citation counts)
 - Venue features (prestige scores, historical citations)
 - Text features (TF-IDF vectorization from abstracts)
 - Handle missing data
 
-### Phase 5: Model Development
+### Phase 5: Model Development ⏳
 - Algorithms: Logistic Regression, Random Forest, XGBoost, LightGBM
 - Classification: Binary (top 25% vs rest)
 - Regression: Log-transformed citation counts
 - 5-fold cross-validation
 
-### Phase 6: Visualization & Reporting
+### Phase 6: Visualization & Reporting ⏳
 - ROC curves and confusion matrices
 - Feature importance analysis
 - Citation distribution analysis
 - Model performance comparison
+
+### Phase 7: Model Deployment 🚀 (NEW)
+- Streamlit web application for predictions
+- Single paper and batch prediction interfaces
+- Real-time model updates
+- Interactive visualizations and insights
 
 ## Tools & Technologies
 
@@ -91,19 +97,73 @@ The project expects access to:
 - **pandas**: Data manipulation and analysis
 - **scikit-learn**: Machine learning models
 - **XGBoost/LightGBM**: Gradient boosting models
-- **matplotlib/seaborn**: Visualization
+- **matplotlib/seaborn/plotly**: Visualization
 - **Jupyter Notebook**: Interactive development
+- **Streamlit**: Model deployment and web interface
 
 ## Getting Started
+
+### Installation
 
 1. Clone this repository
 2. Install required dependencies:
    ```bash
-   pip install pandas numpy scikit-learn xgboost lightgbm matplotlib seaborn jupyter openpyxl
+   pip install -r requirements.txt
    ```
-3. Place your data files in the `data/` directory
-4. Run `jupyter notebook` and open `data_merge.ipynb`
-5. Follow the notebook instructions to merge your data
+
+   Or install manually:
+   ```bash
+   pip install pandas numpy scikit-learn xgboost lightgbm matplotlib seaborn jupyter streamlit plotly openpyxl
+   ```
+
+### Data Preparation
+
+1. Place your data files in the `data/` directory:
+   - `scopus.csv` - Scopus data with abstracts
+   - `scival.csv` - SciVal data with citation metrics
+
+2. Run the data merge notebook:
+   ```bash
+   jupyter notebook data_merge.ipynb
+   ```
+
+3. Follow the notebook instructions to merge your datasets
+
+### Model Deployment
+
+Once you have trained models, deploy them using Streamlit:
+
+```bash
+cd app
+streamlit run streamlit_app.py
+```
+
+The Streamlit app provides:
+- **Single Prediction**: Predict impact for individual papers
+- **Batch Predictions**: Upload CSV/Excel for bulk predictions
+- **Model Insights**: Visualize feature importance and performance
+- **Model Management**: Load and update models dynamically
+
+Access the app at: `http://localhost:8501`
+
+## Project Structure
+
+```
+citapred-prototype/
+├── app/
+│   ├── streamlit_app.py      # Main Streamlit application
+│   └── utils.py               # Utility functions for predictions
+├── data/
+│   ├── scopus.csv            # Scopus data (not in git)
+│   ├── scival.csv            # SciVal data (not in git)
+│   └── merged_citation_data.csv  # Merged dataset
+├── models/                    # Trained models (created during training)
+├── notebooks/                 # Analysis notebooks
+├── data_merge.ipynb          # Data merging workflow
+├── requirements.txt          # Python dependencies
+├── PROJECT_ROADMAP.md        # Detailed project plan
+└── README.md                 # This file
+```
 
 ## Contact
 
